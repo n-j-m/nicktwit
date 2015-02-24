@@ -6,12 +6,6 @@ import Config from "../config";
 
 const TransitionMixin = {
 
-  statics: {
-    willTransitionFrom(transition) {
-      LoadingActions.loading();
-    },
-  },
-
   componentDidMount() {
     LoadingActions.loadingComplete();
   }

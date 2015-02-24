@@ -8,6 +8,6 @@ import Router from "react-router";
 import routes from "./routes";
 
 const content = document.getElementById("content");
-Router.run(routes, Router.HistoryLocation, (Handler) => {
+Router.run(routes, Router.HashLocation, (Handler) => {
   return React.render(<Handler/>, content);
 });

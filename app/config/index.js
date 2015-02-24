@@ -1,11 +1,12 @@
 "use strict";
 
 const _config = {
-  unsecuredRoutes: ["/login"]
+  unsecuredRoutes: ["/login"],
+  REF_URL: "nicktwit.firebaseIO.com"
 }
 
 const Config = {
-  getConfig(key) {
+  get(key) {
     return _config[key];
   }
 }

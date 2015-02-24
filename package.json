@@ -30,6 +30,7 @@
   "devDependencies": {
     "browser-sync": "^2.0.1",
     "del": "^1.1.1",
+    "firebase": "^2.2.1",
     "gulp": "^3.8.11",
     "gulp-concat-css": "^2.0.0",
     "gulp-imagemin": "^2.1.0",

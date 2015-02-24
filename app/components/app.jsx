@@ -7,6 +7,9 @@ import Reflux from "reflux";
 
 import authStore from "../stores/auth_store";
 import loadingStore from "../stores/loading_store";
+
+import AuthActions from "../actions/auth_actions";
+
 import {Navigation} from "react-router";
 
 import TransitionMixin from "../utils/transition_mixin";
@@ -17,8 +20,11 @@ const App = React.createClass({
   mixins: [Reflux.ListenerMixin, Navigation],
 
   getInitialState() {
+
+    AuthActions.getAuthedUser();
+
     return {
-      user: authStore.getUser(),
+      user: DEFAULT_USER,
       isLoading: false
     };
   },
@@ -50,7 +56,7 @@ const App = React.createClass({
         <div className="container">
           <div className="row">
             <div className="col-sm-8 col-sm-offset-2 col-xs-12">
-              <RouteHandler />
+              <RouteHandler user={this.state.user} />
             </div>
           </div>
         </div>

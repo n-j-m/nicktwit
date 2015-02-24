@@ -14,8 +14,7 @@ const AuthStore = Reflux.createStore({
   listenables: AuthActions,
 
   onLoginCompleted(user) {
-    this.user = user;
-    this.trigger({user});
+    this._onLoginOrGetAuthedUser(user);
   },
 
   onLoginFailed(error) {
@@ -25,6 +24,15 @@ const AuthStore = Reflux.createStore({
   onLogout() {
     this.user = this.getDefaultUser();
     this.trigger({user: this.user});
+  },
+
+  onGetAuthedCompleted(user) {
+    this._onLoginOrGetAuthedUser(user);
+  },
+
+  _onLoginOrGetAuthedUser(user) {
+    this.user = user;
+    this.trigger({user});
   },
 
   getUser() {

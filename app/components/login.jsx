@@ -15,7 +15,7 @@ const Login = React.createClass({
         <form role="form" action="login" method="post" className="form-horizontal">
           <div className="form-group">
             <div className="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" name="username" ref="username" placeholder="username" />
+              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" name="email" ref="email" placeholder="email" />
             </div>
           </div>
           <div className="form-group">
@@ -54,10 +54,10 @@ const Login = React.createClass({
   },
 
   doLogin() {
-    var username = this.refs.username.getDOMNode().value;
+    var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
 
-    AuthActions.login(username, password);
+    AuthActions.login(email, password);
   },
 
   handleSignup(evt) {

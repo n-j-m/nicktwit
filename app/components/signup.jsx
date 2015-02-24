@@ -15,7 +15,7 @@ const Signup = React.createClass({
         <form role="form" className="form-horizontal">
           <div className="form-group">
             <div className="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" name="username" ref="username" placeholder="username" />
+              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" name="email" ref="email" placeholder="email" />
             </div>
           </div>
           <div className="form-group">
@@ -25,17 +25,7 @@ const Signup = React.createClass({
           </div>
           <div className="form-group">
             <div className="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" ref="firstname" placeholder="first name" required />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" ref="lastname" placeholder="last name" required />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" ref="nickname" placeholder="nick name" />
+              <input onKeyPress={this.handleKeyPress} type="text" className="form-control" ref="handle" placeholder="handle" required />
             </div>
           </div>
           <div className="form-group">
@@ -75,13 +65,11 @@ const Signup = React.createClass({
   },
 
   doSignup() {
-    const username = this.refs.username.getDOMNode().value;
+    const email = this.refs.email.getDOMNode().value;
     const password = this.refs.password.getDOMNode().value;
-    const firstname = this.refs.firstname.getDOMNode().value;
-    const lastname = this.refs.lastname.getDOMNode().value;
-    const nickname = this.refs.nickname.getDOMNode().value;
+    const handle = this.refs.handle.getDOMNode().value;
 
-    SignupActions.signup(username, password, {firstname, lastname, nickname});
+    SignupActions.signup(email, password, handle);
   }
 
 });
