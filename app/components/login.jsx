@@ -2,11 +2,10 @@
 
 import React from "react";
 import AuthActions from "../actions/auth_actions";
-import TransitionMixin from "../utils/transition_mixin";
 import {Navigation} from "react-router";
 
 const Login = React.createClass({
-  mixins: [TransitionMixin, Navigation],
+  mixins: [Navigation],
 
   render() {
     return (

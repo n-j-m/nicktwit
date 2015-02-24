@@ -18,9 +18,9 @@ const AuthMixin = {
         const user = authStore.getUser();
         if (!user || authStore.getDefaultUser() === user) {
           transition.redirect("/login");
-          LoadingActions.loadingComplete();
         }
       }
+      LoadingActions.loadingComplete();
     }
   }
 

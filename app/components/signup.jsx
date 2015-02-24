@@ -2,11 +2,10 @@
 
 import React from "react";
 import SignupActions from "../actions/signup_actions";
-import TransitionMixin from "../utils/transition_mixin";
 import {Navigation} from "react-router";
 
 const Signup = React.createClass({
-  mixins: [TransitionMixin, Navigation],
+  mixins: [Navigation],
 
   render() {
     return (

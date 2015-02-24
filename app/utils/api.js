@@ -9,7 +9,7 @@ const userRef = ref.child("users");
 
 function populateUser(uid) {
   return new Promise((resolve, reject) => {
-    userRef.child(uid).once("value", (snap) => {
+    userRef.orderByChild("uid").limitToFirst(1).once("child_added", (snap) => {
       const val = snap.val();
       if (!val) return reject(new Error("Invalid User"));
       return resolve(val);
@@ -25,7 +25,7 @@ function createUser(credentials, handle) {
         uid: auth.uid,
         handle: handle
       };
-      userRef.child(auth.uid).set(userObj, (err, auth) => {
+      userRef.child(handle).set(userObj, (err, auth) => {
         if (err) return reject(err);
         return resolve(userObj);
       });

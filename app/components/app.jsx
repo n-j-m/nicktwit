@@ -12,8 +12,6 @@ import AuthActions from "../actions/auth_actions";
 
 import {Navigation} from "react-router";
 
-import TransitionMixin from "../utils/transition_mixin";
-
 const DEFAULT_USER = authStore.getDefaultUser();
 
 const App = React.createClass({
