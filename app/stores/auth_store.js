@@ -2,6 +2,7 @@
 
 import Reflux from "reflux";
 import AuthActions from "../actions/auth_actions";
+import {FlashMessageActions} from "../actions";
 
 const DEFAULT_USER = {username: "__DEFAULT__"};
 
@@ -18,7 +19,9 @@ const AuthStore = Reflux.createStore({
   },
 
   onLoginFailed(error) {
-    this.trigger({error});
+    this.user = DEFAULT_USER;
+    this.trigger({user: this.user});
+    FlashMessageActions.error(error.message);
   },
 
   onLogout() {
@@ -26,7 +29,7 @@ const AuthStore = Reflux.createStore({
     this.trigger({user: this.user});
   },
 
-  onGetAuthedCompleted(user) {
+  onGetAuthedUserCompleted(user) {
     this._onLoginOrGetAuthedUser(user);
   },
 

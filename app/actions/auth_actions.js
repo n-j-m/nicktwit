@@ -2,22 +2,18 @@
 
 import Reflux from "reflux";
 import api from "../utils/api";
-import LoadingActions from "./loading_actions";
+import AsyncIndicator from "../utils/async_indicator";
 
 const AuthActions = Reflux.createActions({
-  "getAuthedUser": {asyncResult: true},
-  "login": {asyncResult: true},
-  "logout": {asyncResult: false}
+  "getAuthedUser": {asyncResult: true, name: "getAuthedUser"},
+  "login": {asyncResult: true, name: "login"},
+  "logout": {asyncResult: false, name: "logout"}
 });
 
-AuthActions.login.preEmit = LoadingActions.loading;
+AsyncIndicator.wire(AuthActions.login);
 AuthActions.login.listenAndPromise(api.login);
-AuthActions.login.completed.listen(LoadingActions.loadingComplete);
-AuthActions.login.failed.listen(LoadingActions.loadingComplete);
 
-AuthActions.getAuthedUser.preEmit = LoadingActions.loading;
+AsyncIndicator.wire(AuthActions.getAuthedUser);
 AuthActions.getAuthedUser.listenAndPromise(api.getAuthedUser);
-AuthActions.getAuthedUser.completed.listen(LoadingActions.loadingComplete);
-AuthActions.getAuthedUser.failed.listen(LoadingActions.loadingComplete);
 
 export default AuthActions;

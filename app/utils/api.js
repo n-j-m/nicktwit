@@ -9,7 +9,7 @@ const userRef = ref.child("users");
 
 function populateUser(uid) {
   return new Promise((resolve, reject) => {
-    userRef.orderByChild("uid").limitToFirst(1).once("child_added", (snap) => {
+    userRef.orderByChild("uid").equalTo(uid).once("child_added", (snap) => {
       const val = snap.val();
       if (!val) return reject(new Error("Invalid User"));
       return resolve(val);
@@ -49,9 +49,17 @@ const api = {
     return new Promise((resolve, reject) => {
 
       createUser({email, password}, handle).
-        then(api.login(email, password)).
-        then(resolve).
-        catch(reject);
+        then((user) => {
+          console.log("signup user:", user);
+          return api.login(email, password)
+        }).
+        then((res) => {
+          console.log("res:", res);
+          resolve(res);
+        }).
+        catch((err) => {
+          reject(err);
+        });
 
     });
   },

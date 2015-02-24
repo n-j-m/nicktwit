@@ -3,9 +3,15 @@
 import React from "react";
 import AuthActions from "../actions/auth_actions";
 import {Navigation} from "react-router";
+import LoadingActions from "../actions/loading_actions";
 
 const Login = React.createClass({
   mixins: [Navigation],
+
+  componentDidMount() {
+      console.log("cdm");
+      LoadingActions.loadingComplete();
+  },
 
   render() {
     return (
