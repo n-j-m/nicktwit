@@ -1,7 +1,5 @@
 import config from "../config";
 
-import LoadingActions from "../actions/loading_actions";
-
 import Firebase from "firebase";
 const ref = new Firebase(config.get("REF_URL"));
 
@@ -50,16 +48,10 @@ const api = {
 
       createUser({email, password}, handle).
         then((user) => {
-          console.log("signup user:", user);
           return api.login(email, password)
         }).
-        then((res) => {
-          console.log("res:", res);
-          resolve(res);
-        }).
-        catch((err) => {
-          reject(err);
-        });
+        then(resolve).
+        catch(reject);
 
     });
   },
@@ -69,7 +61,7 @@ const api = {
       const user = ref.getAuth();
       if (!user) return reject(user);
 
-      return populateUser(user.uid).
+      populateUser(user.uid).
         then(resolve).
         catch(reject);
     });

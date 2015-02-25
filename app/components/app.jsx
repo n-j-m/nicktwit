@@ -21,12 +21,9 @@ const App = React.createClass({
   mixins: [Reflux.ListenerMixin, Navigation],
 
   getInitialState() {
-
-    AuthActions.getAuthedUser();
-
     return {
       user: DEFAULT_USER,
-      isLoading: false,
+      isLoading: true,
       message: {}
     };
   },
@@ -35,6 +32,7 @@ const App = React.createClass({
     this.listenTo(AuthStore, this.onAuth);
     this.listenTo(LoadingStore, this.onLoading);
     this.listenTo(FlashMessageStore, this.onFlashMessage);
+    AuthActions.getAuthedUser();
   },
 
   onFlashMessage(message) {
@@ -42,13 +40,11 @@ const App = React.createClass({
   },
 
   onLoading(isLoading) {
-    console.log(isLoading);
     this.setState({isLoading});
   },
 
   onAuth(authResponse) {
     const user = authResponse.user;
-    console.log("onAuth:", authResponse);
     this.setState({user});
 
     if (user === DEFAULT_USER) {

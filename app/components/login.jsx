@@ -9,7 +9,6 @@ const Login = React.createClass({
   mixins: [Navigation],
 
   componentDidMount() {
-      console.log("cdm");
       LoadingActions.loadingComplete();
   },
 

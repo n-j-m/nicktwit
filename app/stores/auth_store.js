@@ -33,6 +33,10 @@ const AuthStore = Reflux.createStore({
     this._onLoginOrGetAuthedUser(user);
   },
 
+  onGetAuthedUserFailed() {
+    this._onLoginOrGetAuthedUser(DEFAULT_USER);
+  },
+
   _onLoginOrGetAuthedUser(user) {
     this.user = user;
     this.trigger({user});

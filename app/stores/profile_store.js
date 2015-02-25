@@ -15,7 +15,6 @@ const ProfileStore = Reflux.createStore({
 
   onSignupCompleted(res) {
     // update data from signup response
-    console.log(res);
   }
 
 });

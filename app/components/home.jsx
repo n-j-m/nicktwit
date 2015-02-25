@@ -8,7 +8,6 @@ const Home = React.createClass({
   mixins: [AuthMixin],
 
   render() {
-    console.log("user:", this.props.user);
     return (
       <div>
         <h1>Home</h1>
