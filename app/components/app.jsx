@@ -6,8 +6,6 @@ import Nav from "./nav/nav";
 import Reflux from "reflux";
 
 import UserStore from "../stores/user_store";
-import LoadingStore from "../stores/loading_store";
-import FlashMessageStore from "../stores/flashmessage_store";
 
 import AuthActions from "../actions/auth_actions";
 
@@ -26,7 +24,7 @@ const App = React.createClass({
 
   componentWillMount() {
     this.listenTo(UserStore, this.onAuth);
-    AuthActions.getAuthedUser();
+    AuthActions.getAuthedUser()
   },
 
   onAuth(user) {
