@@ -56,6 +56,10 @@ const api = {
     });
   },
 
+  logout() {
+    ref.unauth();
+  },
+
   getAuthedUser() {
     return new Promise((resolve, reject) => {
       const user = ref.getAuth();

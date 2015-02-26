@@ -1,24 +1,20 @@
 "use strict";
 
 import React from "react";
+import Reflux from "reflux";
+
 import AuthActions from "../../actions/auth_actions";
 import NavLink from "./navlink";
 
-import authStore from "../../stores/auth_store";
-
-const DEFAULT_USER = authStore.getDefaultUser();
+import AuthedStore from "../../stores/user_store";
 
 const AuthLink = React.createClass({
-
-  propTypes: {
-    user: React.PropTypes.object
-  },
+  mixins: [Reflux.connect(AuthedStore, "isLoggedIn")],
 
   render() {
-    var user = this.props.user;
     var link;
 
-    if (user === DEFAULT_USER) {
+    if (!this.state.isLoggedIn) {
       link = (
         <NavLink to="login" className="right item">
           <i className="glyphicon glyphicon-log-in"></i> Login

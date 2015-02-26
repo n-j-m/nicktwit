@@ -2,21 +2,20 @@
 
 import React from "react";
 import {Link} from "react-router";
+import Reflux from "reflux";
 
 import AuthLink from "./authlink";
 import NavLink from "./navlink";
 
-const Nav = React.createClass({
+import LoadingStore from "../../stores/loading_store";
 
-  propTypes: {
-    user: React.PropTypes.object.isRequired,
-    isLoading: React.PropTypes.bool.isRequired
-  },
+const Nav = React.createClass({
+  mixins: [Reflux.connect(LoadingStore, "isLoading")],
 
   render() {
 
     var spinner = (
-      this.props.isLoading ? <i className="fa fa-spinner fa-pulse"></i> : "Brand"
+      this.state.isLoading ? <i className="fa fa-spinner fa-pulse"></i> : "Brand"
     );
 
     return (
@@ -36,7 +35,7 @@ const Nav = React.createClass({
               <NavLink to="home">Home</NavLink>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <AuthLink user={this.props.user} />
+              <AuthLink />
             </ul>
           </div>
         </div>

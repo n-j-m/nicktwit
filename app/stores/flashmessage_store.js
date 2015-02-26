@@ -13,10 +13,15 @@ const FlashMessageStore = Reflux.createStore({
   listenables: FlashMessageActions,
 
   _onMessage(message, contextualName) {
+    console.log("message:", message);
     this.trigger({
       contextualName,
       message
     });
+  },
+
+  onClear() {
+    this.trigger({message: null, contextualName: null});
   },
 
   onError(message) {

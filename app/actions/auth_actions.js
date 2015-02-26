@@ -16,4 +16,6 @@ wire(AuthActions.login);
 AuthActions.getAuthedUser.listenAndPromise(api.getAuthedUser);
 wire(AuthActions.getAuthedUser);
 
+AuthActions.logout.listen(api.logout);
+
 export default AuthActions;

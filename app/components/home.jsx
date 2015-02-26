@@ -8,10 +8,11 @@ const Home = React.createClass({
   mixins: [AuthMixin],
 
   render() {
+    const handle = this.props.user ? this.props.user.handle : "";
     return (
       <div>
         <h1>Home</h1>
-        <h2>Welcome, {this.props.user.handle}</h2>
+        <h2>Welcome, {handle}</h2>
         <Following />
       </div>
     );

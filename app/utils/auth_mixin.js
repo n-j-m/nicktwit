@@ -1,6 +1,6 @@
 "use strict";
 
-import authStore from "../stores/auth_store";
+import AuthedStore from "../stores/authed_store";
 import config from "../config";
 import LoadingActions from "../actions/loading_actions";
 
@@ -15,8 +15,7 @@ const AuthMixin = {
   statics: {
     willTransitionTo(transition) {
       if (isSecured(transition.path)) {
-        const user = authStore.getUser();
-        if (!user || authStore.getDefaultUser() === user) {
+        if (!AuthedStore.isLoggedIn()) {
           transition.redirect("/login");
         }
       }

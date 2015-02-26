@@ -1,34 +1,44 @@
 "use strict";
 
 import React from "react/addons";
+import Reflux from "reflux";
+
+import FlashMessageStore from "../stores/flashmessage_store";
+import FlashMessageActions from "../actions/flashmessage_actions";
 
 const cx = React.addons.classSet;
 
 const MessagePanel = React.createClass({
+  mixins: [Reflux.connect(FlashMessageStore)],
 
   render() {
 
-    if (!this.props.message) {
+    if (!this.state.message) {
       return <div />;
     }
 
     const classes = cx({
       "alert": true,
-      "alert-dismissible": true,
-      "alert-info": this.props.contextualName === "info" || !this.props.contextualName,
-      "alert-danger": this.props.contextualName === "error",
-      "alert-warning": this.props.contextualName === "warning",
-      "alert-success": this.props.contextualName === "success"
+      "alert-info": this.state.contextualName === "info" || !this.state.contextualName,
+      "alert-danger": this.state.contextualName === "error",
+      "alert-warning": this.state.contextualName === "warning",
+      "alert-success": this.state.contextualName === "success"
     });
 
     return (
       <div className={classes}>
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" onClick={this.handleClose} className="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        {this.props.message}
+        {this.state.message}
       </div>
     );
+  },
+
+  handleClose(evt) {
+    evt.preventDefault();
+
+    FlashMessageActions.clear();
   }
 
 });

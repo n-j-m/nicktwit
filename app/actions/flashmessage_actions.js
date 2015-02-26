@@ -6,7 +6,8 @@ const FlashMessageActions = Reflux.createActions([
   "error",
   "warning",
   "info",
-  "success"
+  "success",
+  "clear"
 ]);
 
 export default FlashMessageActions;
