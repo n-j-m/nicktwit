@@ -2,12 +2,16 @@
 
 import Reflux from "reflux";
 import AuthActions from "../actions/auth_actions";
+import SignupActions from "../actions/signup_actions";
 import {FlashMessageActions} from "../actions";
 
 const AuthStore = Reflux.createStore({
 
   init() {
     this.user = null;
+
+    this.listenToMany(AuthActions);
+    this.listenToMany(SignupActions);
   },
 
   listenables: AuthActions,
@@ -33,6 +37,10 @@ const AuthStore = Reflux.createStore({
 
   onGetAuthedUserFailed() {
     this._onLoginOrGetAuthedUser(null);
+  },
+
+  onSignupCompleted(user) {
+    this._onLoginOrGetAuthedUser(user);
   },
 
   _onLoginOrGetAuthedUser(user) {

@@ -19,14 +19,12 @@ function createUser(credentials, handle) {
   return new Promise((resolve, reject) => {
     ref.createUser(credentials, (err, auth) => {
       if (err) return reject(err);
-      const userObj = {
-        uid: auth.uid,
-        handle: handle
-      };
-      userRef.child(handle).set(userObj, (err, auth) => {
-        if (err) return reject(err);
-        return resolve(userObj);
-      });
+
+      userRef.child(handle).
+        set({ uid: auth.uid, handle: handle }, (err, auth) => {
+          if (err) return reject(err);
+          return resolve(userObj);
+        });
     });
   });
 }
@@ -38,7 +36,7 @@ const api = {
       userRef.authWithPassword({email, password}, (err, auth) => {
         if (err) return reject(err);
 
-        populateUser(auth.uid).then(resolve).catch(reject);
+        return populateUser(auth.uid).then(resolve).catch(reject);
       });
     });
   },
@@ -46,7 +44,7 @@ const api = {
   signup(email, password, handle) {
     return new Promise((resolve, reject) => {
 
-      createUser({email, password}, handle).
+      return createUser({email, password}, handle).
         then((user) => {
           return api.login(email, password)
         }).
@@ -65,7 +63,7 @@ const api = {
       const user = ref.getAuth();
       if (!user) return reject(user);
 
-      populateUser(user.uid).
+      return populateUser(user.uid).
         then(resolve).
         catch(reject);
     });
