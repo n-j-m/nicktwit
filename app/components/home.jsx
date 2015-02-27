@@ -12,8 +12,8 @@ const Home = React.createClass({
     return (
       <div>
         <h1>Home</h1>
-        <h2>Welcome, {handle}</h2>
-        <Following />
+        <h2>Welcome, @{handle}</h2>
+        <Following user={this.props.user} />
       </div>
     );
   }

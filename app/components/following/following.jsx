@@ -1,13 +1,38 @@
 "use strict";
 
 import React from "react";
+import Reflux from "reflux";
+
+import FollowingActions from "../../actions/following_actions";
+import FollowingStore from "../../stores/following_store";
+
+import FollowingList from "./followinglist";
 
 const Following = React.createClass({
+  mixins: [ Reflux.connect(FollowingStore) ],
+
+  getInitialState() {
+    return {
+      following: []
+    };
+  },
+
+  componentWillMount() {
+    FollowingActions.getFollowing(this.props.user);
+  },
+
+  componentWillRecieveProps(nextProps) {
+    FollowingActions.getFollowing(nextProps.user);
+  },
+
+  propTypes: {
+    user: React.PropTypes.object.isRequired
+  },
 
   render() {
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">.following</div>
+        <div className="panel-heading">Following</div>
         <div className="panel-body">
           <form role="form" className="form-horizontal">
             <div className="form-group col-xs-offset-1 col-lg-12">
@@ -16,13 +41,7 @@ const Following = React.createClass({
           </form>
         </div>
 
-        <div className="list-group">
-          <a className="list-group-item">Cras justo odio</a>
-          <a className="list-group-item">Dapibus ac facilisis in</a>
-          <a className="list-group-item">Morbi leo risus</a>
-          <a className="list-group-item">Porta ac consectetur ac</a>
-          <a className="list-group-item">Vestibulum at eros</a>
-        </div>
+        <FollowingList following={this.state.following} />
 
       </div>
     );

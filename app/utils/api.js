@@ -4,6 +4,7 @@ import Firebase from "firebase";
 const ref = new Firebase(config.get("REF_URL"));
 
 const userRef = ref.child("users");
+const followingRef = ref.child("following");
 
 function populateUser(uid) {
   return new Promise((resolve, reject) => {
@@ -66,6 +67,20 @@ const api = {
       return populateUser(user.uid).
         then(resolve).
         catch(reject);
+    });
+  },
+
+  getFollowing(user) {
+    return new Promise((resolve, reject) => {
+      followingRef.child(user.handle).on("value", (snap) => {
+        const val = snap.val();
+        if (!val) return resolve([]);
+        return resolve(
+          Object.keys(val).map(function(handle) {
+            return {handle};
+          })
+        );
+      });
     });
   }
 
